@@ -59,8 +59,6 @@ function connect () {
   return mongoose.connect(MONGO_URI_CONNECTION, {useNewUrlParser: true});
 }
 
-connect();
-
 /**
  * Event listener for HTTP server "error" event.
  */
@@ -100,5 +98,5 @@ function onListening() {
     : 'port ' + addr.port;
   connect().then(() => {
     debug('Listening on ' + bind);
-  }).catch(err => { console.log(err) });
+  }).catch(err => { throw new Error(err); });
 }
