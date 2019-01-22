@@ -5,9 +5,14 @@ const createError = require('http-errors');
 
 const app = express();
 
+// API Routes
+const UsersRouter = require('./routes/Users');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use('/users', UsersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
