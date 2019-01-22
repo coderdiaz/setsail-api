@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
+require('dotenv').config();
 const app = require('../app');
 const debug = require('debug')('setsail-api:server');
 const http = require('http');
+const mongoose = require('mongoose');
 
 /**
  * Get port from environment and store in Express.
@@ -50,6 +52,16 @@ function normalizePort(val) {
 }
 
 /**
+ * Creating connection to MongoDB
+ */
+function connect () {
+  const MONGO_URI_CONNECTION = process.env.MONGO_URI || '';
+  return mongoose.connect(MONGO_URI_CONNECTION, {useNewUrlParser: true});
+}
+
+connect();
+
+/**
  * Event listener for HTTP server "error" event.
  */
 
@@ -86,5 +98,7 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  connect().then(() => {
+    debug('Listening on ' + bind);
+  }).catch(err => { console.log(err) });
 }
