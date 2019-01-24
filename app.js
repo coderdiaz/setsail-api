@@ -2,6 +2,20 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const createError = require('http-errors');
+const firebase = require('firebase');
+require('firebase/auth');
+
+// Firebase params
+const firebaseConfig = {
+  apiKey: process.env.FIREBASE_APIKEY,
+  authDomain: process.env.FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASEURL,
+  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const app = express();
 
