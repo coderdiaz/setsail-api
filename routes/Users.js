@@ -8,19 +8,4 @@ router.get('/', async (req, res, next) => {
   return res.status(200).json(data);
 });
 
-/* POST / */
-router.post('/', (req, res, next) => {
-  const { body: { name, lastname, email } } = req;
-  const User = new UserModel({
-    name,
-    lastname,
-    email,
-  });
-  User.save();
-  return res.status(201).json({
-    code: 201,
-    message: 'User created',
-  });
-});
-
 module.exports = router;

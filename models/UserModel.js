@@ -28,6 +28,9 @@ const UserSchema = new Schema({
   avatar: {
     type: String,
   },
+  providerId: {
+    type: String,
+  },
 }, {
   timestamps: true,
 });

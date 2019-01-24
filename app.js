@@ -21,12 +21,14 @@ const app = express();
 
 // API Routes
 const UsersRouter = require('./routes/Users');
+const AuthRouter = require('./routes/Auth');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/users', UsersRouter);
+app.use('/auth', AuthRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
