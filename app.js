@@ -4,6 +4,7 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const firebase = require('firebase');
 require('firebase/auth');
+const isAuthenticated = require('./middlewares/isAuthenticated');
 
 // Firebase params
 const firebaseConfig = {
@@ -27,7 +28,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/users', UsersRouter);
+app.use('/users', isAuthenticated, UsersRouter);
 app.use('/auth', AuthRouter);
 
 // catch 404 and forward to error handler
