@@ -17,6 +17,8 @@ const isAuthenticated = (req, res, next) => {
           message: 'Unauthorized',
         });
       }
+      // Adding the user to request
+      req.userId = decoded.user._id;
       next();
     });
   }
