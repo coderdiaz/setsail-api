@@ -20,15 +20,18 @@ firebase.initializeApp(firebaseConfig);
 
 const app = express();
 
-// API Routes
+// Getting API Routers
 const UsersRouter = require('./routes/Users');
+const PostsRouter = require('./routes/Posts');
 const AuthRouter = require('./routes/Auth');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Defining API routes
 app.use('/users', isAuthenticated, UsersRouter);
+app.use('/posts', isAuthenticated, PostsRouter);
 app.use('/auth', AuthRouter);
 
 // catch 404 and forward to error handler
